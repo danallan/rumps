@@ -445,7 +445,7 @@ class MenuItem(Menu):
             return args[0]
         return super(MenuItem, cls).__new__(cls, *args, **kwargs)
 
-    def __init__(self, title, callback=None, key=None, icon=None, dimensions=None):
+    def __init__(self, title, callback=None, key=None, icon=None, dimensions=None, state=False):
         if isinstance(title, MenuItem):  # don't initialize already existing instances
             return
         self._menuitem = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(unicode(title), None, '')
@@ -453,6 +453,7 @@ class MenuItem(Menu):
         self._menu = self._icon = None
         self.set_callback(callback, key)
         self.set_icon(icon, dimensions)
+        self.state = state
         super(MenuItem, self).__init__()
 
     def __setitem__(self, key, value):
